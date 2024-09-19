@@ -8,8 +8,6 @@ export function FavLink() {
     const {data, status} = useSession()
     const [userFavLink, setUserFavLink] = useState()
     useEffect(() => {
-        const userData
-        router
     }, [])
     return (
         <>
