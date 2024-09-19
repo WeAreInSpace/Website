@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import Session from "../components/@home/session/session";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "We Are In Space",
@@ -16,6 +17,7 @@ export default function HomeLayout({
     <html lang="en">
       <body>
         <Session>
+          <SpeedInsights></SpeedInsights>
           {children}
         </Session>
       </body>
