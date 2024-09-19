@@ -15,7 +15,7 @@
     "classnames": "^2.5.1",
     "framer-motion": "^11.3.19",
     "jose": "^5.9.2",
-    "next": "14.2.5",
+    "next": "^14.2.12",
     "next-auth": "^4.24.7",
     "nodemailer": "^6.9.14",
     "react": "^18",
