@@ -1,13 +1,6 @@
-import { ZiraAppFrame } from "@/components/@zira/@app/frame/frame";
-import { prisma } from "@/lib/prisma";
+import { ZiraAppFrame } from "@/components/@zira/@app/frame/frame"
 
 export default async function ZiraApp() {
-    prisma.ziraCloud.findUnique({
-        where: {
-            userId: ""
-        }
-    })
-
     return (
         <>
             <ZiraAppFrame>
