@@ -1,11 +1,9 @@
 import "./frame.scss"
 import Link from "next/link"
 import { AccountMenu } from "@/components/account/account"
-import { prisma } from "@/lib/prisma"
 import { FavLink } from "./fav-link.client"
-import { MainFrame } from "./frame.client"
 
-export async function ZiraAppFrame({ children }: { children: React.ReactNode }) {        
+export async function ZiraAppFrame({ children }: { children: React.ReactNode }) {
     return (
         <>
             <div className="zira-app-frame-header">
@@ -27,9 +25,9 @@ export async function ZiraAppFrame({ children }: { children: React.ReactNode }) 
             </div>
             <div className="zira-app-frame-pack">
                 <div className="zira-app-frame-fav-link">
-                    <FavLink/>
+                    <FavLink />
                 </div>
-                <MainFrame>{children}</MainFrame>
+                {children}
             </div>
         </>
     )
