@@ -1,0 +1,11 @@
+@import "../globals.scss";
+
+.docs-pack {
+    display: flex;
+}
+
+@media screen and (max-width: $screen-md) {
+    .docs-pack {
+        flex-direction: column;
+    }
+}

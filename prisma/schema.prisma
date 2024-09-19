@@ -1,0 +1,208 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+
+  minecraftUserName String?
+  description       String?
+
+  accounts Account[]
+  sessions Session[]
+
+  createdAt                      DateTime                         @default(now())
+  updatedAt                      DateTime                         @updatedAt
+  ziraCloud                      ZiraCloud?
+  ZiraDocsUserAllow              ZiraDocsUserAllow[]
+//  ZiraLinuxCommandBlockUserAllow ZiraLinuxCommandBlockUserAllow[]
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model ZiraCloud {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique @db.ObjectId
+
+  ZiraDocs              ZiraDocs?
+//  ZiraLinuxCommandBlock ZiraLinuxCommandBlock?
+  ZiraFavLink           ZiraFavLink[]
+}
+
+//ZIRA FAV LINK START
+//ZIRA FAV LINK START
+//ZIRA FAV LINK START
+
+model ZiraFavLink {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  ZiraCloud   ZiraCloud @relation(fields: [ziraCloudId], references: [id])
+  ziraCloudId String    @db.ObjectId
+
+  url String
+}
+
+//ZIRA FAV LINK END
+//ZIRA FAV LINK END
+//ZIRA FAV LINK END
+
+//ZIRA DOCS START
+//ZIRA DOCS START
+//ZIRA DOCS START
+
+model ZiraDocs {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  ZiraCloud   ZiraCloud @relation(fields: [ziraCloudId], references: [id], onDelete: Cascade)
+  ziraCloudId String    @unique @db.ObjectId
+
+  ZiraDocsPage ZiraDocsPage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ZiraDocsPage {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  ZiraDocs   ZiraDocs @relation(fields: [ziraDocsId], references: [ziraCloudId])
+  ziraDocsId String   @db.ObjectId
+
+  name            String
+  content         String
+  ZiraDocsSetting ZiraDocsSetting?
+}
+
+model ZiraDocsSetting {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  ZiraDocsPage   ZiraDocsPage @relation(fields: [ziraDocsPageId], references: [id])
+  ziraDocsPageId String       @unique @db.ObjectId
+
+  publish   Boolean
+  shareWith ZiraDocsUserAllow[]
+}
+
+model ZiraDocsUserAllow {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+
+  ZiraDocsSetting   ZiraDocsSetting? @relation(fields: [ziraDocsSettingId], references: [id])
+  ziraDocsSettingId String?          @db.ObjectId
+
+  permission String
+}
+
+//ZIRA DOCS END
+//ZIRA DOCS END
+//ZIRA DOCS END
+
+//ZIRA LINUX COMMAND BLOCK START
+//ZIRA LINUX COMMAND BLOCK START
+//ZIRA LINUX COMMAND BLOCK START
+
+//model ZiraLinuxCommandBlock {
+//  id String @id @default(auto()) @map("_id") @db.ObjectId
+//
+//  ZiraCloud   ZiraCloud @relation(fields: [ziraCloudId], references: [id], onDelete: Cascade)
+//  ziraCloudId String    @unique @db.ObjectId
+//
+//  commandBlockMap ZiraLinuxCommandBlockMap[]
+//}
+//
+//model ZiraLinuxCommandBlockMap {
+//  id String @id @default(auto()) @map("_id") @db.ObjectId
+//
+//  ZiraLinuxCommandBlock   ZiraLinuxCommandBlock? @relation(fields: [ziraLinuxCommandBlockId], references: [id])
+//  ziraLinuxCommandBlockId String?                @db.ObjectId
+//
+//  title       String
+//  description String?
+//
+//  commandBlockSchema ZiraLinuxCommandBlockSchema[]
+//}
+//
+//model ZiraLinuxCommandBlockSchema {
+//  id String @id @default(auto()) @map("_id") @db.ObjectId
+//
+//  ZiraLinuxCommandBlockMap   ZiraLinuxCommandBlockMap? @relation(fields: [ziraLinuxCommandBlockMapId], references: [id])
+//  ziraLinuxCommandBlockMapId String?                   @db.ObjectId
+//
+//  command_object String
+//  type String
+//}
+//
+//model ZiraLinuxCommandBlockMapSetting {
+//  id String @id @default(auto()) @map("_id") @db.ObjectId
+//
+//  shareWith ZiraLinuxCommandBlockUserAllow[]
+//}
+//
+//model ZiraLinuxCommandBlockUserAllow {
+//  id String @id @default(auto()) @map("_id") @db.ObjectId
+//
+//  user   User   @relation(fields: [userId], references: [id])
+//  userId String @db.ObjectId
+//
+//  ZiraLinuxCommandBlockMapSetting   ZiraLinuxCommandBlockMapSetting? @relation(fields: [ziraLinuxCommandBlockMapSettingId], references: [id])
+//  ziraLinuxCommandBlockMapSettingId String?                          @db.ObjectId
+//
+//  permission String
+//}
+
+//ZIRA LINUX COMMAND BLOCK END
+//ZIRA LINUX COMMAND BLOCK END
+//ZIRA LINUX COMMAND BLOCK END

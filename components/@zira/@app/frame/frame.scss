@@ -1,0 +1,46 @@
+.zira-app-frame-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
+    border-bottom: 1px solid rgb(30, 30, 30);
+    backdrop-filter: blur(5px);
+    align-items: center;
+}
+
+.zira-app-frame-wais-logo {
+    background: url("/Logo/WAIS-Light.svg");
+    width: 50px;
+    height: 43.25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.zira-app-frame-zira-logo {
+    background: url("/Logo/Zira-Light.svg");
+    width: 117px;
+    height: 43.25px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.zira-app-frame-header-button {
+    display: flex;
+    align-items: center;
+}
+
+.zira-app-frame-logo-in {
+    width: 1px;
+    height: 43.25px;
+    background-color: rgb(101, 101, 101);
+    margin: 0 16px;
+}
+
+.zira-app-frame-pack {
+    display: flex;
+}
+
+.zira-app-frame-fav-link {
+
+}

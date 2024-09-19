@@ -1,0 +1,154 @@
+@import "../../../app/globals.scss";
+
+.signin-form-pack {
+    display: flex;
+    gap: 22px;
+    flex-direction: column;
+    background-color: rgb(22, 22, 22);
+    padding: 22px;
+    border-radius: 10px;
+    border-top: 2px solid rgb(31, 31, 31);
+}
+
+.signin {
+    display: flex;
+    gap: 22px;
+    flex-direction: column;
+}
+
+@media screen and (max-width: $screen-sm) {
+    .signin-form-pack {
+        gap: 20px;
+    }
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.signin-pack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 60px;
+}
+
+.signin-title {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    line-height: 1;
+    margin: 2px 0 15px 0;
+    font-size: 30px;
+}
+
+.signin-question {
+    font-size: 17px;
+    text-wrap: wrap;
+    text-align: center;
+    margin: 15px 0 12px 0;
+}
+
+.signin-form-message {
+    border-radius: 5px;
+    padding: 5px 12px;
+    color: #ffffff;
+    border-top: 2px solid rgb(40, 40, 40);
+    border-left: 4px solid rgb(50, 50, 50);
+    background-color: rgb(34, 34, 34);
+    width: 284px;
+
+    p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: $screen-sm) {
+    .signin-form-message {
+        width: 272px;
+    }
+}
+
+.signin-input {
+    color: rgb(255, 255, 255);
+    padding: 11px 15px;
+    width: 284px;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: rgb(0, 0, 0);
+    border: #343434 solid 1px;
+}
+
+@media screen and (max-width: $screen-sm) {
+    .signin-input {
+        width: 272px;
+    }
+}
+
+.signin-input:focus {
+    outline: 2px rgb(255, 255, 255) solid;
+}
+
+.signin-input::placeholder {
+    color: rgb(150, 150, 150);
+}
+
+.signin-with-google {
+    color: rgb(255, 255, 255);
+    padding: 12px 20px;
+    width: 284px;
+    border-radius: 8px;
+    background-color: rgb(34, 34, 34);
+    font-size: 14px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-top: 2px solid rgb(40, 40, 40);
+    cursor: pointer;
+}
+
+@media screen and (max-width: $screen-sm) {
+    .signin-with-google {
+        width: 272px;
+    }
+}
+
+.signin-submit-button {
+    color: rgb(255, 255, 255);
+    padding: 12px 20px;
+    width: 284px;
+    border-radius: 8px;
+    background-color: rgb(34, 34, 34);
+    font-size: 14px;
+    border-top: 2px solid rgb(40, 40, 40);
+    cursor: pointer;
+}
+
+@media screen and (max-width: $screen-sm) {
+    .signin-submit-button {
+        width: 272px;
+    }
+}
+
+.signin-wais-logo {
+    background: url("/Logo/WAIS-Light.svg");
+    min-width: 80px;
+    min-height: 69.2px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.signin-logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.signin-question {
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+}
