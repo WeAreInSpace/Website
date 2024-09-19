@@ -1,6 +1,6 @@
 import { ZiraAppFrame } from "@/components/@zira/@app/frame/frame"
 
-export default async function ZiraApp() {
+export default function ZiraApp() {
     return (
         <>
             <ZiraAppFrame>
