@@ -22,6 +22,26 @@ $screen-col: 1280px;
 //computer learge
 $screen-colx: 1535px;
 
+$main_c: rgb(0, 0, 0);
+
+$black0: rgb(10, 10, 10);
+$black0_pop: rgb(16, 16, 16);
+
+$black1: rgb(22, 22, 22);
+$black1_pop: rgb(31, 31, 31);
+
+$black2: rgb(34, 34, 34);
+$black2_pop: rgb(40, 40, 40);
+
+$black3: rgb(50, 50, 50);
+$black3_pop: rgb(59, 59, 59);
+
+$white1: rgb(255, 255, 255);
+$white2: rgb(208, 208, 208);
+
+$blue1: rgb(0, 145, 255);
+$link1: rgb(0, 142, 250);
+
 html {
   scroll-behavior: smooth;
 }
