@@ -62,9 +62,9 @@ export async function createUser(prevState: any, formData: FormData) {
 
     const urlSaveUserData = decodeURIComponent(userData)
 
-    const redirectTo = new URLSearchParams("/setup/profile")
-    redirectTo.append("setup", "true")
-    redirectTo.append("userData", urlSaveUserData)
+    const setupRedirectUrl = new URLSearchParams()
+    setupRedirectUrl.append("setup", "true")
+    setupRedirectUrl.append("userData", urlSaveUserData)
 
-    redirect(redirectTo.toString())
+    redirect("/setup/profile?" + setupRedirectUrl.toString())
 }

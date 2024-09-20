@@ -20,11 +20,11 @@ model User {
   accounts Account[]
   sessions Session[]
 
-  createdAt                      DateTime                         @default(now())
-  updatedAt                      DateTime                         @updatedAt
-  ziraCloud                      ZiraCloud?
-  ZiraDocsUserAllow              ZiraDocsUserAllow[]
-//  ZiraLinuxCommandBlockUserAllow ZiraLinuxCommandBlockUserAllow[]
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  ziraCloud         ZiraCloud
+  ZiraDocsUserAllow ZiraDocsUserAllow[]
+  //  ZiraLinuxCommandBlockUserAllow ZiraLinuxCommandBlockUserAllow[]
 }
 
 model Account {
@@ -72,12 +72,14 @@ model VerificationToken {
 model ZiraCloud {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique @db.ObjectId
 
-  ZiraDocs              ZiraDocs?
-//  ZiraLinuxCommandBlock ZiraLinuxCommandBlock?
-  ZiraFavLink           ZiraFavLink[]
+  workspaceName String
+
+  ZiraDocs    ZiraDocs?
+  ZiraFavLink ZiraFavLink[]
+  //ZiraLinuxCommandBlock ZiraLinuxCommandBlock?
 }
 
 //ZIRA FAV LINK START
@@ -87,7 +89,7 @@ model ZiraCloud {
 model ZiraFavLink {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  ZiraCloud   ZiraCloud @relation(fields: [ziraCloudId], references: [id])
+  ZiraCloud   ZiraCloud @relation(fields: [ziraCloudId], references: [id], onDelete: Cascade)
   ziraCloudId String    @db.ObjectId
 
   url String
@@ -105,7 +107,7 @@ model ZiraDocs {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
   ZiraCloud   ZiraCloud @relation(fields: [ziraCloudId], references: [id], onDelete: Cascade)
-  ziraCloudId String    @unique @db.ObjectId
+  ziraCloudId String    @db.ObjectId
 
   ZiraDocsPage ZiraDocsPage[]
 
@@ -116,7 +118,7 @@ model ZiraDocs {
 model ZiraDocsPage {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  ZiraDocs   ZiraDocs @relation(fields: [ziraDocsId], references: [ziraCloudId])
+  ZiraDocs   ZiraDocs @relation(fields: [ziraDocsId], references: [id], onDelete: Cascade)
   ziraDocsId String   @db.ObjectId
 
   name            String
@@ -127,7 +129,7 @@ model ZiraDocsPage {
 model ZiraDocsSetting {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  ZiraDocsPage   ZiraDocsPage @relation(fields: [ziraDocsPageId], references: [id])
+  ZiraDocsPage   ZiraDocsPage @relation(fields: [ziraDocsPageId], references: [id], onDelete: Cascade)
   ziraDocsPageId String       @unique @db.ObjectId
 
   publish   Boolean
@@ -140,7 +142,7 @@ model ZiraDocsUserAllow {
   user   User   @relation(fields: [userId], references: [id])
   userId String @db.ObjectId
 
-  ZiraDocsSetting   ZiraDocsSetting? @relation(fields: [ziraDocsSettingId], references: [id])
+  ZiraDocsSetting   ZiraDocsSetting? @relation(fields: [ziraDocsSettingId], references: [id], onDelete: Cascade)
   ziraDocsSettingId String?          @db.ObjectId
 
   permission String

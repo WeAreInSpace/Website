@@ -1,7 +1,6 @@
 import "./frame.scss"
 import Link from "next/link"
 import { AccountMenu } from "@/components/account/account"
-import { FavLink } from "./fav-link.client"
 
 export async function ZiraAppFrame({ children }: { children: React.ReactNode }) {
     return (
@@ -24,9 +23,6 @@ export async function ZiraAppFrame({ children }: { children: React.ReactNode }) 
                 </div>
             </div>
             <div className="zira-app-frame-pack">
-                <div className="zira-app-frame-fav-link">
-                    <FavLink />
-                </div>
                 {children}
             </div>
         </>

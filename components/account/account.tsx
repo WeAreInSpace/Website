@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import LoadClientData from "../header/header.action";
 import "./account.scss"
+import { redirect } from "next/navigation";
 
 export function AccountMenu() {
     const { data: session, status } = useSession();
@@ -25,8 +26,23 @@ export function AccountMenu() {
     >()
 
     useEffect(() => {
+        
         async function getClientData() {
-            const clientData = await LoadClientData({ email: session?.user?.email as string })
+            const email = session?.user?.email
+
+            if (email === null) {
+                const errorRedirectUrl = new URLSearchParams()
+                errorRedirectUrl.append("message", "You are not using Google Provider or Email Provider to sign in to We Are In Space website")
+                redirect("/error?" + errorRedirectUrl.toString())
+            }
+
+            if (email === undefined) {
+                const errorRedirectUrl = new URLSearchParams()
+                errorRedirectUrl.append("message", "Email = undefind. This might error while Server are creating user data, please contact me on Github or Discord")
+                redirect("/error?" + errorRedirectUrl.toString())
+            }
+
+            const clientData = await LoadClientData({ email })
             setUserData(clientData)
             console.log(clientData)
         }
