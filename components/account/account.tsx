@@ -7,23 +7,12 @@ import { useState, useEffect, useRef } from "react";
 import LoadClientData from "../header/header.action";
 import "./account.scss"
 import { redirect } from "next/navigation";
+import { User } from "@prisma/client";
 
 export function AccountMenu() {
     const { data: session, status } = useSession();
 
-    const [userData, setUserData] = useState<
-        {
-            id: string;
-            name: string | null;
-            email: string | null;
-            emailVerified: Date | null;
-            image: string | null;
-            minecraftUserName: string | null;
-            description: string | null;
-            createdAt: Date;
-            updatedAt: Date;
-        } | null
-    >()
+    const [userData, setUserData] = useState<User>()
 
     useEffect(() => {
         
@@ -32,19 +21,25 @@ export function AccountMenu() {
 
             if (email === null) {
                 const errorRedirectUrl = new URLSearchParams()
-                errorRedirectUrl.append("message", "You are not using Google Provider or Email Provider to sign in to We Are In Space website")
+                errorRedirectUrl.append("message", "You are not using Google Provider or Email Provider to sign in to We Are In Space website (Are you hacking)")
                 redirect("/error?" + errorRedirectUrl.toString())
             }
 
             if (email === undefined) {
                 const errorRedirectUrl = new URLSearchParams()
-                errorRedirectUrl.append("message", "Email = undefind. This might error while Server are creating user data, please contact me on Github or Discord")
+                errorRedirectUrl.append("message", "Email = undefind.")
                 redirect("/error?" + errorRedirectUrl.toString())
             }
 
             const clientData = await LoadClientData({ email })
+
+            if (clientData === null) {
+                const errorRedirectUrl = new URLSearchParams()
+                errorRedirectUrl.append("message", "UserData = null. Server cannot find your data in database")
+                redirect("/error?" + errorRedirectUrl.toString())
+            }
+
             setUserData(clientData)
-            console.log(clientData)
         }
         if (session) {
             getClientData()
