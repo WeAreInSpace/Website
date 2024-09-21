@@ -6,13 +6,15 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import LoadClientData from "../header/header.action";
 import "./account.scss"
-import { redirect } from "next/navigation";
 import { User } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 export function AccountMenu() {
     const { data: session, status } = useSession();
 
     const [userData, setUserData] = useState<User>()
+
+    const router = useRouter()
 
     useEffect(() => {
         
@@ -22,13 +24,15 @@ export function AccountMenu() {
             if (email === null) {
                 const errorRedirectUrl = new URLSearchParams()
                 errorRedirectUrl.append("message", "You are not using Google Provider or Email Provider to sign in to We Are In Space website (Are you hacking)")
-                redirect("/error?" + errorRedirectUrl.toString())
+                router.push("/error?" + errorRedirectUrl.toString())
+                return
             }
 
             if (email === undefined) {
                 const errorRedirectUrl = new URLSearchParams()
                 errorRedirectUrl.append("message", "Email = undefind.")
-                redirect("/error?" + errorRedirectUrl.toString())
+                router.push("/error?" + errorRedirectUrl.toString())
+                return
             }
 
             const clientData = await LoadClientData({ email })
@@ -36,7 +40,8 @@ export function AccountMenu() {
             if (clientData === null) {
                 const errorRedirectUrl = new URLSearchParams()
                 errorRedirectUrl.append("message", "UserData = null. Server cannot find your data in database")
-                redirect("/error?" + errorRedirectUrl.toString())
+                router.push("/error?" + errorRedirectUrl.toString())
+                return
             }
 
             setUserData(clientData)

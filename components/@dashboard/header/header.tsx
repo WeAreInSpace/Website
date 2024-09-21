@@ -5,38 +5,51 @@ import { AnimatePresence, motion } from "framer-motion";
 import "./header.scss"
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import LoadClientData from "@/components/@dashboard/header/header.action";
 import { AccountMenu } from "@/components/account/account";
+import { User } from "@prisma/client";
 
 function DashboardHeaderLink() {
     return (
         <>
-
         </>
     )
 }
 
 export default function DashboardHeader() {
+    const router = useRouter()
     const [isOpenMiniHeader, setIsOpenMiniHeader] = useState<boolean>(false)
 
     const { data: session, status } = useSession();
-    const [userData, setUserData] = useState<
-        {
-            id: string;
-            name: string | null;
-            email: string | null;
-            emailVerified: Date | null;
-            image: string | null;
-            minecraftUserName: string | null;
-            description: string | null;
-            createdAt: Date;
-            updatedAt: Date;
-        } | null
-    >()
+    const [userData, setUserData] = useState<User>()
     useEffect(() => {
         async function getClientData() {
-            const clientData = await LoadClientData({ email: session?.user?.email as string })
+            const email = session?.user?.email
+
+            if (email === null) {
+                const errorRedirectUrl = new URLSearchParams()
+                errorRedirectUrl.append("message", "You are not using Google Provider or Email Provider to sign in to We Are In Space website (Are you hacking)")
+                router.push("/error?" + errorRedirectUrl.toString())
+                return
+            }
+
+            if (email === undefined) {
+                const errorRedirectUrl = new URLSearchParams()
+                errorRedirectUrl.append("message", "Email = undefind.")
+                router.push("/error?" + errorRedirectUrl.toString())
+                return
+            }
+
+            const clientData = await LoadClientData({ email: email })
+            
+            if (clientData === null) {
+                const errorRedirectUrl = new URLSearchParams()
+                errorRedirectUrl.append("message", "UserData = null. Server cannot find your data in database. (Are you hacking)")
+                router.push("/error?" + errorRedirectUrl.toString())
+                return
+            }
+            
             setUserData(clientData)
         }
         if (session) {
