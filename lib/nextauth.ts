@@ -1,11 +1,11 @@
 import type { NextAuthOptions } from "next-auth"
 
 import GoogleProvider from "next-auth/providers/google"
-import EmailProvider from "next-auth/providers/email";
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import { prisma } from "@/lib/prisma";
+import EmailProvider from "next-auth/providers/email"
+import { prisma } from "@/lib/prisma"
 import type { Adapter } from "next-auth/adapters"
-import { createTransport } from "nodemailer";
+import { createTransport } from "nodemailer"
+import { PrismaAdapter } from "@auth/prisma-adapter"
 
 export const config: NextAuthOptions = {
     providers: [
@@ -57,6 +57,11 @@ export const config: NextAuthOptions = {
     callbacks: {
         async signIn({ user, account, email }) {
             if (account?.provider === "email") {
+                if (!user.email) {
+                    const redirectTo = new URLSearchParams()
+                    redirectTo.append("message", "Email cannot be null or undefined. Email is require in our database if email is null or undefind, server will cannot query user_data in database (Are you hacking.)")
+                    return "/error?" + redirectTo.toString()
+                }
                 const emailCount = await prisma.user.count({
                     where: {
                         email: user.email
