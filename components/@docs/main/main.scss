@@ -1,0 +1,13 @@
+@import "../../../app/globals.scss";
+
+.docs-main {
+    padding: 50px 0 50px 0;
+    overflow-y: auto;
+    width: 100%;
+}
+
+@media screen and (max-width: $screen-md) {
+    .docs-main {
+        padding: 25px 0 50px 0;
+    }
+}
