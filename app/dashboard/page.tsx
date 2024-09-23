@@ -1,6 +1,6 @@
 import DashboardHeader from "@/components/@dashboard/header/header";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
     return (
         <>
             <DashboardHeader></DashboardHeader>
