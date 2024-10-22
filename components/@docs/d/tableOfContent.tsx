@@ -12,23 +12,32 @@ type TOC = TOCObject[];
 export default function Toc() {
     const [tocData, setTocData] = useState<TOC>()
 
-    useEffect(() => {
-        async function getHeadingData() {
-            const rawTableOfContent = await document.querySelectorAll(".d-h")
-            let toc: TOC = []
+    async function sleep(msec: number) {
+        return new Promise(resolve => setTimeout(resolve, msec));
+    }
 
-            await rawTableOfContent.forEach((data, index) => {
-                const tableOfContent: TOCObject = {
-                    title: data.textContent,
-                    id: data.id
-                }
-                toc.push(tableOfContent)
-            })
-
-            await setTocData(toc)
+    async function changeColor(header: HTMLElement | null) {
+        if (header && header.style.backgroundColor === "") {
+            header.style.backgroundColor = "rgb(34, 34, 34)";
+            await sleep(6000)
+            header.style.backgroundColor = "";
         }
+    }
 
-        getHeadingData()
+
+    useEffect(() => {
+        const rawTableOfContent = document.querySelectorAll(".d-h")
+        let toc: TOC = []
+
+        rawTableOfContent.forEach((data, index) => {
+            const tableOfContent: TOCObject = {
+                title: data.textContent,
+                id: data.id
+            }
+            toc.push(tableOfContent)
+        })
+
+        setTocData(toc)
     }, [])
 
     return (
@@ -37,7 +46,14 @@ export default function Toc() {
             <ul className="d-main-toc-list-pack">
                 {tocData?.map((data, index) => (
                     <li key={index} className="d-main-toc-list">
-                        <a href={`#${data.id}`} className="fPr-4 d-main-toc-link">{data.title}</a>
+                        <a
+                            href={`#${data.id}`}
+                            className="fPr-4 d-main-toc-link"
+                            onClick={() => {
+                                const header = document.getElementById(data.id)
+                                changeColor(header)
+                            }}
+                        >{data.title}</a>
                     </li>
                 ))}
             </ul>

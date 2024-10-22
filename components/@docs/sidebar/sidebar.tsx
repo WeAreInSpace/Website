@@ -20,7 +20,7 @@ function SideBarItem() {
             </Pack>
 
             <Pack title="Community">
-                <SidebarLink to="coop">Could you help me? (coop)</SidebarLink>
+                <SidebarLink to="coop">Collaboration (co-op)</SidebarLink>
             </Pack>
 
             <Pack title="How-To Guides">

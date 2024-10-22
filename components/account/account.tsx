@@ -12,49 +12,6 @@ import { useRouter } from "next/navigation";
 export function AccountMenu() {
     const { data: session, status } = useSession();
 
-    const [userData, setUserData] = useState<User>()
-
-    const router = useRouter()
-
-    useEffect(() => {
-        
-        async function getClientData() {
-            const email = session?.user?.email
-
-            if (email === null) {
-                const errorRedirectUrl = new URLSearchParams()
-                errorRedirectUrl.append("message", "You are not using Google Provider or Email Provider to sign in to We Are In Space website (Are you hacking)")
-                router.push("/error?" + errorRedirectUrl.toString())
-                return
-            }
-
-            if (email === undefined) {
-                const errorRedirectUrl = new URLSearchParams()
-                errorRedirectUrl.append("message", "Email = undefind.")
-                router.push("/error?" + errorRedirectUrl.toString())
-                return
-            }
-
-            const clientData = await LoadClientData({ email })
-
-            if (clientData === null) {
-                const errorRedirectUrl = new URLSearchParams()
-                errorRedirectUrl.append("message", "UserData = null. Server cannot find your data in database")
-                router.push("/error?" + errorRedirectUrl.toString())
-                return
-            }
-
-            /*if (!clientData.setup) {
-                router.push("/setup")
-            }*/
-
-            setUserData(clientData)
-        }
-        if (session) {
-            getClientData()
-        }
-    }, [session])
-
     const [isOpenAccountMenu, setIsOpenAccountMenu] = useState<boolean>(false)
 
     const accountDropdown = useRef<HTMLDivElement | null>(null);
@@ -89,7 +46,7 @@ export function AccountMenu() {
                     ? (
                         <div className="account-dropdown">
                             <button className="fP-4 account" onClick={() => setIsOpenAccountMenu(!isOpenAccountMenu)}>
-                                <img src={!!userData?.image ? `${userData?.image}` : "/Profile/no-image.png"} ref={accountProfleRef} />
+                                <img src={!!session.user?.image ? `${session.user?.image}` : "/Profile/no-image.png"} ref={accountProfleRef} />
                             </button>
                             <AnimatePresence mode="popLayout">
                                 {isOpenAccountMenu &&
@@ -112,10 +69,10 @@ export function AccountMenu() {
                                         >
                                             <div className="account-dropdown-content-profile-pack" ref={accountBannerRef}>
                                                 <div className="account-dropdown-content-profile-image">
-                                                    <img src={!!userData?.image ? `${userData?.image}` : "/Profile/no-image.png"} ref={accountBannerImageRef} />
+                                                <img src={!!session.user?.image ? `${session.user?.image}` : "/Profile/no-image.png"} ref={accountBannerImageRef} />
                                                 </div>
                                                 <div className="account-dropdown-content-profile-name">
-                                                    <p className="fPr-4" ref={accountBannerTextRef}>{userData?.name}</p>
+                                                    <p className="fPr-4" ref={accountBannerTextRef}>{session.user?.name}</p>
                                                 </div>
                                             </div>
                                             <div className="account-dropdown-content-link-pack" ref={accountLinkPackRef}>
