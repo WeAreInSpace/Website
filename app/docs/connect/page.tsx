@@ -4,11 +4,11 @@ export default async function DocsWelcome() {
     return (
         <d.main
             title="วิธีเชื่อมต่อเซิร์ฟเวอร์"
-            desc="วิธีการเชื่อมต่อไปยังเซิร์ฟเวอร์ We Are In Space"
+            desc="วิธีการเชื่อมต่อไปยังเซิร์ฟเวอร์ We Are In Space [ภาษาทางการ]"
             pageForm="Getting Started"
         >
             <d.code runIn="Server Address" code="weareinspace.net" />
-            <d.p>Minecraft เวอร์ชันอื่น ๆ เช่น Windows 10, Pocket Edition หรือเวอร์ชันคอนโซลจะไม่สามารถใช้งานได้ ตัวเกมที่ละเมิดลิขสิทธิ์จะถูกบล็อก</d.p>
+            <d.p>ตัวเกม Minecraft เวอร์ชันที่ละเมิดลิขสิทธิ์จะถูกบล็อก (Offline mode)</d.p>
             
             <d.h1 id="ไปที่เมนูผู้เล่นหลายคน">ไปที่เมนูผู้เล่นหลายคน</d.h1>
             <d.p>คลิกปุ่ม Multiplayer บนเมนูหลัก</d.p>

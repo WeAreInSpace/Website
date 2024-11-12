@@ -1,6 +1,4 @@
-import Link from "next/link"
 import "./main.scss"
-import Image from "next/image"
 
 export default function HomeMain() {
     return (
@@ -8,8 +6,8 @@ export default function HomeMain() {
             <div className="home-main-pack">
                 <main className="home-main main-container">
                     <div>
-                        <h1>Playing</h1>
-                        
+                        <h1></h1>
+                        <p>We Are In Space is the simple Minecraft server.</p>
                     </div>
                 </main>
             </div>

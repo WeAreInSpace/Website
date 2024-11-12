@@ -21,6 +21,7 @@ function SideBarItem() {
 
             <Pack title="Community">
                 <SidebarLink to="coop">Collaboration (co-op)</SidebarLink>
+                <SidebarLink to="welcome-sign">เปลี่ยนเกาะส่วนตัวเป็นเกาะสาธารณะ</SidebarLink>
             </Pack>
 
             <Pack title="How-To Guides">

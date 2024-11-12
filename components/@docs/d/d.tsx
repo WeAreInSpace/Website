@@ -16,7 +16,7 @@ namespace d {
                             <></>
                         )
                         : (
-                            <h5 className="d-main-form fPr-4">{pageForm}</h5>
+                            <h4 className="d-main-form fPr-4">{pageForm}</h4>
                         )
                     }
                     <h1 className="d-main-title fPr-6">{title}</h1>
