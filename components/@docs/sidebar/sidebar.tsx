@@ -21,10 +21,14 @@ function SideBarItem() {
 
             <Pack title="Community">
                 <SidebarLink to="coop">Collaboration (co-op)</SidebarLink>
-                <SidebarLink to="welcome-sign">เปลี่ยนเกาะส่วนตัวเป็นเกาะสาธารณะ</SidebarLink>
+            </Pack>
+
+            <Pack title="Utility">
+                <SidebarLink to="command-palette">Command Palette</SidebarLink>
             </Pack>
 
             <Pack title="How-To Guides">
+                <SidebarLink to="welcome-sign">เปลี่ยนเกาะส่วนตัวเป็นเกาะสาธารณะ</SidebarLink>
                 <SidebarLink to="protection">การป้องกันสิ่งก่อสร้าง</SidebarLink>
             </Pack>
 

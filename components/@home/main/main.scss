@@ -2,9 +2,41 @@
 
 .home-main {
     display: flex;
-    padding-top: 140px;
+    padding-top: 110px;
     padding-bottom: 150px;
     gap: 45px;
     justify-content: space-between;
     align-items: center;
+}
+
+.home-main-title {
+    font-size: 112.5px;
+    line-height: 1;
+}
+
+.home-main-title-pack {
+    color: rgb(255, 255, 255);
+}
+
+.home-bg {
+    position: absolute;
+    z-index: -1;
+}
+
+.home-2 {
+    left: 0px;
+    top: 0px;
+    filter: blur(100px);
+}
+
+.home-3 {
+    left: 88px;
+    top: 0px;
+    filter: blur(100px);
+}
+
+.home-1 {
+    bottom: -5px;
+    right: 0;
+    filter: blur(100px);
 }

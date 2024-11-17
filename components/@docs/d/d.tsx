@@ -120,6 +120,19 @@ namespace d {
             <span className="d-p fPr-5">{children}</span>
         )
     }
+    export function cps() {
+        return (
+            <div className="d-c-cps">
+                <div className="d-c-cps-logo"></div>
+                <div className="d-c-cps-title">
+                    <p className="fP-6 d-c-cps-p">Compatible with</p>
+                    <p className="fP-6 d-c-cps-p">Command Palette</p>
+                    <p></p>
+                </div>
+                <Link href="command-palette" className="d-link fP-3 d-c-cps-l">More</Link>
+            </div>
+        )
+    }
 }
 
 export default d

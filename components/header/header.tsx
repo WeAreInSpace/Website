@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll } from "framer-motion";
 import "./header.scss"
 import { useState } from "react";
 import { useSession } from "next-auth/react";
@@ -58,9 +58,21 @@ function HeaderLink2() {
 export default function Header() {
     const [isOpenMiniHeader, setIsOpenMiniHeader] = useState<boolean>(false)
 
+    const { scrollY } = useScroll()
+
     return (
         <>
-            <header className="header main-container">
+            <motion.header
+                className="header main-container"
+                animate={scrollY.get() > 1
+                    ? {
+                        backgroundColor: "black"
+                    }
+                    : {
+
+                    }
+                }
+            >
                 <ul>
                     <li>
                         <Link href={"/"}>
@@ -83,7 +95,7 @@ export default function Header() {
                         <motion.div className="home-miniheader-hamberger_menu"></motion.div>
                     </button>
                 </ul>
-            </header>
+            </motion.header>
             <AnimatePresence mode="popLayout">
                 {isOpenMiniHeader && (
                     <motion.header

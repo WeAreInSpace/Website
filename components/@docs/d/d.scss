@@ -9,6 +9,49 @@
     display: flex;
 }
 
+.d-c-cps {
+    background: radial-gradient(98% 83% at 99% 99%, rgba(151, 9, 197, 1) 0%, rgba(11, 0, 15, 1) 100%);
+    padding: 15px;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid rgb(21, 14, 23);
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(50px);
+    padding: 32px;
+    gap: 32px;
+    margin-bottom: 17px;
+    margin-top: 26px;
+
+    .d-c-cps-logo {
+        background: url("/Logo/WeAreInSpace-Light.svg");
+        width: 143px;
+        height: 32px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .d-c-cps-title {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .d-c-cps-p {
+            color: rgb(255, 255, 255);
+            font-size: 48px;
+            line-height: 1;
+        }
+    }
+
+    .d-c-cps-l {
+        font-size: 16px;
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+    }
+}
+
 .d-main {
     display: flex;
     flex-direction: column;

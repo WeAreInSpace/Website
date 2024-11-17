@@ -45,7 +45,7 @@ export default function CodeClient({ code, runIn }: { code: string, runIn: strin
                     >Copy</motion.button>
                 </div>
             </div>
-            <div className="d-code-block fP-4">
+            <div className="d-code-block fPr-4">
                 {code}
             </div>
         </div>
