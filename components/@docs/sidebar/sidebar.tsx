@@ -25,6 +25,7 @@ function SideBarItem() {
 
             <Pack title="Utility">
                 <SidebarLink to="command-palette">Command Palette</SidebarLink>
+                <SidebarLink to="item-guide-book">Item Guide Book</SidebarLink>
             </Pack>
 
             <Pack title="How-To Guides">

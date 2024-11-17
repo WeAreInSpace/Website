@@ -17,6 +17,7 @@
     border: 1px solid rgb(21, 14, 23);
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     backdrop-filter: blur(50px);
     padding: 32px;
     gap: 32px;
@@ -49,6 +50,7 @@
         font-size: 16px;
         text-decoration: none;
         color: rgb(255, 255, 255);
+        display: block;
     }
 }
 
