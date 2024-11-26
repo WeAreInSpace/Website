@@ -2,7 +2,7 @@
 
 .home-main {
     display: flex;
-    padding-top: 110px;
+    padding-top: 120px;
     padding-bottom: 150px;
     gap: 45px;
     justify-content: space-between;
@@ -10,7 +10,7 @@
 }
 
 .home-main-title {
-    font-size: 112.5px;
+    font-size: 113px;
     line-height: 1;
 }
 
@@ -26,17 +26,17 @@
 .home-2 {
     left: 0px;
     top: 0px;
-    filter: blur(100px);
+    filter: blur(200px);
 }
 
 .home-3 {
     left: 88px;
     top: 0px;
-    filter: blur(100px);
+    filter: blur(200px);
 }
 
 .home-1 {
     bottom: -5px;
     right: 0;
-    filter: blur(100px);
+    filter: blur(200px);
 }
